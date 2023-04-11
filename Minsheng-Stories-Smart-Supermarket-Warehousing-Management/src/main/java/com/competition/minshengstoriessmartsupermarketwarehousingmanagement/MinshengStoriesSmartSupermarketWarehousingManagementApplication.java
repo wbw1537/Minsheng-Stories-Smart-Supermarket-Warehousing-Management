@@ -9,6 +9,6 @@ public class MinshengStoriesSmartSupermarketWarehousingManagementApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MinshengStoriesSmartSupermarketWarehousingManagementApplication.class, args);
-	}
+		}
 
 }
