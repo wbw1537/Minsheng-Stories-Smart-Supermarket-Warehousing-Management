@@ -1,7 +1,7 @@
 package com.competition.minshengstoriessmartsupermarketwarehousingmanagement.controller;
 
 import com.competition.minshengstoriessmartsupermarketwarehousingmanagement.entitity.*;
-import com.competition.minshengstoriessmartsupermarketwarehousingmanagement.mapper.itemsMapper;
+import com.competition.minshengstoriessmartsupermarketwarehousingmanagement.mapper.ItemsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class getInfoController {
+public class GetItemsController {
     @Autowired
-    private itemsMapper itemsMapper;
+    private ItemsMapper itemsMapper;
 
     //获取所有商品信息的通用属性
     @GetMapping("/items")

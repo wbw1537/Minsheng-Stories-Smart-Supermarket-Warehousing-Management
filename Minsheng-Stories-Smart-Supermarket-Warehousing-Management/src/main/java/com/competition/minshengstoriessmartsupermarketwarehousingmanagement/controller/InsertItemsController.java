@@ -1,14 +1,15 @@
 package com.competition.minshengstoriessmartsupermarketwarehousingmanagement.controller;
 
 import com.competition.minshengstoriessmartsupermarketwarehousingmanagement.entitity.*;
+import com.competition.minshengstoriessmartsupermarketwarehousingmanagement.mapper.ItemsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class insertItemsController {
+public class InsertItemsController {
     @Autowired
-    private com.competition.minshengstoriessmartsupermarketwarehousingmanagement.mapper.itemsMapper itemsMapper;
+    private ItemsMapper itemsMapper;
 
     //插入饮料信息
     @PostMapping("/insertDrinks")
