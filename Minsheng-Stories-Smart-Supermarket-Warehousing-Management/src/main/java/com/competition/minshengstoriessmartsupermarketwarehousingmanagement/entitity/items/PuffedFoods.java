@@ -1,5 +1,8 @@
 package com.competition.minshengstoriessmartsupermarketwarehousingmanagement.entitity.items;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
+@TableName("puffedFoodsTable")
 public class PuffedFoods extends Items {
     //类型（薯片、虾条、...）
     String puffedFoodType;

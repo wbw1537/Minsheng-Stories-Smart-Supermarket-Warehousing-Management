@@ -1,21 +1,44 @@
 package com.competition.minshengstoriessmartsupermarketwarehousingmanagement.entitity.storeInfo;
 
-import java.sql.Date;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 
-public class storeInfo {
-    private Long storeID;
+import java.util.Date;
+
+@TableName("storeTable")
+public class StoreInfo {
+    private Long itemID;
     private String itemType;
     private Long amount;
     private Date validDate;
     private double actuallyPrice;
+    @TableId(type = com.baomidou.mybatisplus.annotation.IdType.AUTO)
     private Long storeItemID;
+    private Double purchasePrice;
 
-    public Long getStoreID() {
-        return storeID;
+    public StoreInfo(Long itemID, String itemType, Long amount, Date validDate, double actuallyPrice, Double purchasePrice) {
+        this.itemID = itemID;
+        this.itemType = itemType;
+        this.amount = amount;
+        this.validDate = validDate;
+        this.actuallyPrice = actuallyPrice;
+        this.purchasePrice = purchasePrice;
+    }
+    public StoreInfo(){};
+    public Double getPurchasePrice() {
+        return purchasePrice;
     }
 
-    public void setStoreID(Long storeID) {
-        this.storeID = storeID;
+    public void setPurchasePrice(Double purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
+    public Long getItemID() {
+        return itemID;
+    }
+
+    public void setItemID(Long itemID) {
+        this.itemID = itemID;
     }
 
     public String getItemType() {

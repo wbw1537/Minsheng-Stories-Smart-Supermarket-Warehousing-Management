@@ -1,7 +1,11 @@
 package com.competition.minshengstoriessmartsupermarketwarehousingmanagement.entitity.order;
 
+import com.baomidou.mybatisplus.annotation.*;
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 
+import java.util.Date;
+
+@TableName("ordersTable")
 public class Order {
     private Long orderID;
     private Long containerID;
@@ -9,7 +13,20 @@ public class Order {
     private Long customerID;
     private String paymentInfo;
     private String orderName;
-    private DateTimeLiteralExpression.DateTime orderTime;
+    @TableField(fill = FieldFill.INSERT)
+    private Date orderTime;
+
+    public Order() {
+    }
+
+    public Order(Long orderID, Long containerID, String orderStatus, Long customerID, String paymentInfo, String orderName) {
+        this.orderID = orderID;
+        this.containerID = containerID;
+        this.orderStatus = orderStatus;
+        this.customerID = customerID;
+        this.paymentInfo = paymentInfo;
+        this.orderName = orderName;
+    }
 
     public Long getOrderID() {
         return orderID;
@@ -59,11 +76,11 @@ public class Order {
         this.orderName = orderName;
     }
 
-    public DateTimeLiteralExpression.DateTime getOrderTime() {
+    public Date getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(DateTimeLiteralExpression.DateTime orderTime) {
+    public void setOrderTime(Date orderTime) {
         this.orderTime = orderTime;
     }
 }

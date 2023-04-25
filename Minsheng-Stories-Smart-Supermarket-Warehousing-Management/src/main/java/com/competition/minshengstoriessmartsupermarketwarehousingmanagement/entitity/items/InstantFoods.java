@@ -1,5 +1,8 @@
 package com.competition.minshengstoriessmartsupermarketwarehousingmanagement.entitity.items;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
+@TableName("instantFoodsTable")
 public class InstantFoods extends Items {
     //口感（酸、甜、辣）
     String tasteType;

@@ -1,5 +1,8 @@
 package com.competition.minshengstoriessmartsupermarketwarehousingmanagement.entitity.items;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
+@TableName("drinksTable")
 public class Drinks extends Items {
     //饮料类型（碳酸、果汁、乳制品、茶）
     private String drinkType;

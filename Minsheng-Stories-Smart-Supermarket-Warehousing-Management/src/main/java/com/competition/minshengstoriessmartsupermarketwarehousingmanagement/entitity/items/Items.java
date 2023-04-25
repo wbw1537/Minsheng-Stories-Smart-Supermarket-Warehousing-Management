@@ -2,10 +2,11 @@ package com.competition.minshengstoriessmartsupermarketwarehousingmanagement.ent
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-
+@TableName("itemsTable")
 public class Items {
 
     @TableId(value = "itemID",type = IdType.AUTO)

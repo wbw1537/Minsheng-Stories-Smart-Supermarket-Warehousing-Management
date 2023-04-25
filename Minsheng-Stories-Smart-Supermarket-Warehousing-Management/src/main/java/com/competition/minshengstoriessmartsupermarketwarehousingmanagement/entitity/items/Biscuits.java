@@ -1,9 +1,10 @@
 package com.competition.minshengstoriessmartsupermarketwarehousingmanagement.entitity.items;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
+@TableName("biscuitsTable")
 public class Biscuits extends Items {
     //口感（软、脆、酥）
     private String tasteType;

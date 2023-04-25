@@ -1,5 +1,8 @@
 package com.competition.minshengstoriessmartsupermarketwarehousingmanagement.entitity.order;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
+@TableName("ordersInfoTable")
 public class OrderInfo {
     private Long orderID;
     private Long itemID;
@@ -7,6 +10,29 @@ public class OrderInfo {
     private Long containerID;
     private Long amount;
     private Double actuallyPrice;
+
+    private Double purchasePrice;
+
+    public OrderInfo(Long orderID, Long itemID, String itemType, Long containerID, Long amount, Double actuallyPrice, Double purchasePrice) {
+        this.orderID = orderID;
+        this.itemID = itemID;
+        this.itemType = itemType;
+        this.containerID = containerID;
+        this.amount = amount;
+        this.actuallyPrice = actuallyPrice;
+        this.purchasePrice = purchasePrice;
+    }
+
+    public OrderInfo() {
+    }
+
+    public Double getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public void setPurchasePrice(Double purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
 
     public Long getOrderID() {
         return orderID;

@@ -1,4 +1,4 @@
-package com.competition.minshengstoriessmartsupermarketwarehousingmanagement.incrementer;
+package com.competition.minshengstoriessmartsupermarketwarehousingmanagement.component;
 
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import java.util.concurrent.atomic.AtomicLong;
