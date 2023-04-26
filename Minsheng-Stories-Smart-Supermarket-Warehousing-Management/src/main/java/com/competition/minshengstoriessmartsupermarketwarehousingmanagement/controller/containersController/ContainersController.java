@@ -31,6 +31,48 @@ public class ContainersController {
         return containerService.SaleItemsFromContainer(orderID,containerID,itemID,itemType,amount);
     }
 
+    //选出保质期小于一周的货柜库存
+    @ApiOperation(value = "选出保质期小于一周的货柜库存")
+    @GetMapping("/containers/items/warning")
+    public List<ContainerItems> getWarningOfPerishableContainers(){
+        return containerService.getWarningOfPerishableItems();
+    }
+
+    //添加货柜
+    @ApiOperation(value = "添加货柜")
+    @PostMapping("/containers")
+    public String addContainer(Long containerID, String LocateInfo, String containerType, String containerStatus, String containerName, String containerDescription, Double containerVolume){
+        return containerService.addContainer(containerID,LocateInfo,containerType,containerStatus,containerName,containerDescription,containerVolume);
+    }
+
+    //删除货柜
+    @ApiOperation(value = "删除货柜")
+    @DeleteMapping("/containers/{containerID}")
+    public String deleteContainer(@PathVariable Long containerID){
+        return containerService.deleteContainer(containerID);
+    }
+
+    //修改货柜信息
+    @ApiOperation(value = "修改货柜信息")
+    @PutMapping("/containers")
+    public String updateContainer(Containers container){
+        return containerService.updateContainer(container);
+    }
+
+    //查询所有货柜信息
+    @ApiOperation(value = "查询所有货柜信息")
+    @GetMapping("/containers")
+    public List<Containers> selectAllContainers(){
+        return containerService.getAllContainers();
+    }
+
+    //根据货柜id查询货柜信息
+    @ApiOperation(value = "根据货柜id查询货柜信息")
+    @GetMapping("/containers/{containerID}")
+    public Containers selectContainerById(@PathVariable Long containerID){
+        return containerService.getContainerById(containerID);
+    }
+
 //    //增加货柜信息
 //    @ApiOperation(value = "增加货柜")
 //    @PostMapping("/containers")

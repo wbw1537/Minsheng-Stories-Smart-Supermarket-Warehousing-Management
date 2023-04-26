@@ -1,15 +1,18 @@
 package com.competition.minshengstoriessmartsupermarketwarehousingmanagement.service;
 
+import com.competition.minshengstoriessmartsupermarketwarehousingmanagement.entitity.items.ItemSummary;
 import com.competition.minshengstoriessmartsupermarketwarehousingmanagement.entitity.storeInfo.StoreInfo;
 import com.competition.minshengstoriessmartsupermarketwarehousingmanagement.mapper.StoresMapper;
 import com.competition.minshengstoriessmartsupermarketwarehousingmanagement.mapper.items.ItemsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class StoreService {
@@ -43,6 +46,14 @@ public class StoreService {
         return "添加货品成功";
     }
 
-    //TODO:临期食品预警
+    //选出保质期小于一周的商品库存
+    public List<StoreInfo> getWarningOfPerishableItems(){
+        return storesMapper.getWarningOfPerishableItems();
+    }
+
+    //获取所有库存信息
+    public List<StoreInfo> getAllStoreInfo(){
+        return storesMapper.selectList(null);
+    }
 
 }

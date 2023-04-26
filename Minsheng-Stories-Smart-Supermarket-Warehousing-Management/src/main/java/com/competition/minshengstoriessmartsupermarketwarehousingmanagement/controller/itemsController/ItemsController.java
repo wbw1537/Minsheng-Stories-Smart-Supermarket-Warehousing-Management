@@ -1,24 +1,21 @@
 package com.competition.minshengstoriessmartsupermarketwarehousingmanagement.controller.itemsController;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.competition.minshengstoriessmartsupermarketwarehousingmanagement.entitity.items.*;
 import com.competition.minshengstoriessmartsupermarketwarehousingmanagement.mapper.items.ItemsMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import com.competition.minshengstoriessmartsupermarketwarehousingmanagement.service.ItemsService;
 
-@Api(tags = "商品管理")
+@Api(tags = "商品接口")
 @RestController
 public class ItemsController {
     @Autowired
     private ItemsService itemsService;
+    @Autowired
+    private ItemsMapper itemsMapper;
     //返回商品种类及占比
     @ApiOperation(value = "返回商品种类及占比")
     @GetMapping("/items/kinds")
@@ -33,51 +30,84 @@ public class ItemsController {
         return itemsService.findAll();
     }
 
-//    //删除饮料信息
-//    @ApiOperation(value = "删除饮料信息")
-//    @DeleteMapping("/drinks/{id}")
-//    public String deleteDrinks(@PathVariable Long id){
-//        int i = itemsMapper.deleteDrinksById(id);
-//        if(i > 0) return "删除成功";
-//        else return "删除失败";
-//    }
-//
-//    //删除饼干信息
-//    @ApiOperation(value = "删除饼干信息")
-//    @DeleteMapping("/biscuits/{id}")
-//    public String deleteBiscuits(@PathVariable Long id){
-//        int i = itemsMapper.deleteBiscuitsById(id);
-//        if(i > 0) return "删除成功";
-//        else return "删除失败";
-//    }
-//
-//    //删除即食食品信息
-//    @ApiOperation(value = "删除即食食品信息")
-//    @DeleteMapping("/instantFoods/{id}")
-//    public String deleteInstantFoods(@PathVariable Long id){
-//        int i = itemsMapper.deleteInstantFoodsById(id);
-//        if(i > 0) return "删除成功";
-//        else return "删除失败";
-//    }
-//
-//    //删除防护用品信息
-//    @ApiOperation(value = "删除防护用品信息")
-//    @DeleteMapping("/protectiveGears/{id}")
-//    public String deleteProtectiveGears(@PathVariable Long id){
-//        int i = itemsMapper.deleteProtectiveGearsById(id);
-//        if(i > 0) return "删除成功";
-//        else return "删除失败";
-//    }
-//
-//    //删除膨化食品信息
-//    @ApiOperation(value = "删除膨化食品信息")
-//    @DeleteMapping("/puffedFoods/{id}")
-//    public String deletePuffedFoods(@PathVariable Long id){
-//        int i = itemsMapper.deletePuffedFoodsById(id);
-//        if(i > 0) return "删除成功";
-//        else return "删除失败";
-//    }
-//
+    //添加饼干
+    @ApiOperation(value = "添加饼干")
+    @PostMapping("/items/biscuits")
+    public String insertBiscuits(Biscuits biscuits){
+        return itemsService.insertBiscuit(biscuits);
+    }
+
+    //添加饮料
+    @ApiOperation(value = "添加饮料")
+    @PostMapping("/items/drinks")
+    public String insertDrinks(Drinks drinks){
+        return itemsService.insertDrink(drinks);
+    }
+
+    //添加即食食品
+    @ApiOperation(value = "添加即食食品")
+    @PostMapping("/items/instantFoods")
+    public String insertInstantFood(InstantFoods instantFood){
+        return itemsService.insertInstantFood(instantFood);
+    }
+
+    //添加膨化食品
+    @ApiOperation(value = "添加膨化食品")
+    @PostMapping("/items/puffedFoods")
+    public String insertPuffedFood(PuffedFoods puffedFood){
+        return itemsService.insertPuffedFood(puffedFood);
+    }
+
+    //添加防护用品
+    @ApiOperation(value = "添加防护用品")
+    @PostMapping("/items/protectiveGears")
+    public String insertProtectiveGear(ProtectiveGears protectiveGear){
+        return itemsService.insertProtectiveGear(protectiveGear);
+    }
+
+    //根据商品id以及商品类型删除商品
+    @ApiOperation(value = "删除商品")
+    @DeleteMapping("/items/{itemType}/{itemID}")
+    public String deleteItem(@PathVariable("itemID") Long itemID, @PathVariable("itemType") String itemType){
+        return itemsService.deleteItem(itemID, itemType);
+    }
+
+    //修改饼干信息
+    @ApiOperation(value = "修改饼干信息")
+    @PutMapping("/items/biscuits")
+    public String updateBiscuits(Biscuits biscuits){
+        return itemsService.updateBiscuit(biscuits);
+    }
+
+    //修改饮料信息
+    @ApiOperation(value = "修改饮料信息")
+    @PutMapping("/items/drinks")
+    public String updateDrinks(Drinks drinks){
+        return itemsService.updateDrink(drinks);
+    }
+
+    //修改即食食品信息
+    @ApiOperation(value = "修改即食食品信息")
+    @PutMapping("/items/instantFoods")
+    public String updateInstantFoods(InstantFoods instantFoods){
+        return itemsService.updateInstantFood(instantFoods);
+    }
+
+    //修改膨化食品信息
+    @ApiOperation(value = "修改膨化食品信息")
+    @PutMapping("/items/puffedFoods")
+    public String updatePuffedFoods(PuffedFoods puffedFoods){
+        return itemsService.updatePuffedFood(puffedFoods);
+    }
+
+    //修改防护用品信息
+    @ApiOperation(value = "修改防护用品信息")
+    @PutMapping("/items/protectiveGears")
+    public String updateProtectiveGears(ProtectiveGears protectiveGears){
+        return itemsService.updateProtectiveGear(protectiveGears);
+    }
+
+
 //    //插入饮料信息
 //    @ApiOperation(value = "插入饮料信息")
 //    @PostMapping("/drinks")
@@ -168,16 +198,6 @@ public class ItemsController {
 //        else return "更新失败";
 //    }
 //
-
-//
-//    //获取商品种类信息
-//    @ApiOperation(value = "获取商品种类信息")
-//    @GetMapping("/itemsType")
-//    public List findAllItemsType(){
-//        List<Type> list = itemsMapper.selectAllItemsTypes();
-//        System.out.println(list);
-//        return list;
-//    }
 //
 //    //获取所有饮料信息
 //    @ApiOperation(value = "获取所有饮料信息")
@@ -219,19 +239,11 @@ public class ItemsController {
 //    @ApiOperation(value = "获取所有膨化食品信息")
 //    @GetMapping("/puffedFoods")
 //    public List findAllPuffedFoods(){
-//        List<PuffedFoods> list = itemsMapper.selectAllPuffedFoods();
+//        List<PuffedFoods> list = itemsMapper.selectAllPufferFoods();
 //        System.out.println(list);
 //        return list;
 //    }
 //
-//    //根据id获取饮料信息
-//    @ApiOperation(value = "根据id获取饮料信息")
-//    @GetMapping("/drinks/{id}")
-//    public Drinks findDrinksById(@PathVariable("id") Long id){
-//        Drinks drinks = itemsMapper.selectDrinksById(id);
-//        System.out.println(drinks);
-//        return drinks;
-//    }
 
     //TODO:实现根据标签查找商品
 }

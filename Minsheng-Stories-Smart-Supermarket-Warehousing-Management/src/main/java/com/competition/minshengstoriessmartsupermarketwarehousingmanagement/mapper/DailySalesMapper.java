@@ -63,9 +63,18 @@ public interface DailySalesMapper extends BaseMapper<DailySales> {
 //            "FROM past_month_sales, total_sales;\n")
 //    public List<TypeWithPercentage> getLastMonthSalesPercentage();
 
+    //根据日期筛选昨天的销售数据，并且按照商品种类和商品id给出商品的销售信息
     @Select("SELECT item.itemName, item.itemSupplier, item.itemPurchasePrice, sum(sales) as sales , sum(amount) as amount, sum((sales - (purchasePrice * amount))) as profit \n" +
             "FROM dailySalesTable \n" +
             "inner join ${tableName} item on dailySalesTable.itemID = item.itemID\n" +
             "WHERE dailySalesTable.itemType = #{itemType} AND dailySalesTable.itemID = #{itemID} AND date = DATE_SUB(CURDATE(), INTERVAL 1 DAY)")
     Map<String, Object> getYesterdaySalesAndProfit(@Param("tableName") String tableName, @Param("itemType") String itemType, @Param("itemID") int itemID);
+
+    //根据日期筛选昨天的销售数据，并且按照货柜id给出货柜的销量以及占比
+    @Select("SELECT containerID, sum(sales) as sales, sum(amount) as amount, sum((sales - (purchasePrice * amount))) as profit \n" +
+            "FROM dailySalesTable \n" +
+            "WHERE containerID = #{containerID} and date = DATE_SUB(CURDATE(), INTERVAL 1 DAY)\n" +
+            "GROUP BY containerID")
+    Map<String, Object> getYesterdaySalesAndProfitByContainerID(Long containerID);
+
 }

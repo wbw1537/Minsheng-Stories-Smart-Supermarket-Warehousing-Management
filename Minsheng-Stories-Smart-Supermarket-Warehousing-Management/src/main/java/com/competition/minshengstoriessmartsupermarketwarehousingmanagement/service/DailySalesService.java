@@ -79,12 +79,20 @@ public class DailySalesService {
         return salesByItemType;
     }
 
-    //根据商品种类以及id获取商品销售信息
+    //根据日期筛选昨天的销售数据，并且按照商品种类和商品id给出商品的销售信息
     public Map<String, Object> getYesterdaySalesAndProfit(String itemType, int itemID) {
         String tableName = itemsMapper.getTableNameByTypeName(itemType);
         System.out.println(tableName);
         return dailySalesTableMapper.getYesterdaySalesAndProfit(tableName,itemType,itemID);
     }
 
+    //根据日期筛选昨天的销售数据，并且按照货柜id给出货柜的销量
+    public Map<String, Object> getYesterdaySalesAndProfitByContainerID(Long containerID) {
+        return dailySalesTableMapper.getYesterdaySalesAndProfitByContainerID(containerID);
+    }
 
+    //查询所有销售数据
+    public List<DailySales> getAllSales() {
+        return dailySalesTableMapper.selectList(null);
+    }
 }

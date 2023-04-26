@@ -1,43 +1,38 @@
 package com.competition.minshengstoriessmartsupermarketwarehousingmanagement.entitity.items;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
-@TableName("itemsTable")
-public class Items {
-
-    @TableId(value = "itemID",type = IdType.AUTO)
-    //pk,商品id
-    //@ApiModelProperty("商品id")
+@TableName("itemSummaryTable")
+public class ItemSummary {
+    @TableId(type = com.baomidou.mybatisplus.annotation.IdType.AUTO)
+    private Long itemSummaryID;
     private Long itemID;
     //商品种类
-    //@ApiModelProperty("商品种类")
     private String itemType;
     //商品名称
-    //@ApiModelProperty("商品名称")
     private String itemName;
     //描述
-    //@ApiModelProperty("描述")
     private String itemDescription;
     //进货价格
-    //@ApiModelProperty("进货价格")
     private double itemPurchasePrice;
     //推荐售价
-    //@ApiModelProperty("推荐售价")
     private double itemRecommendedPrice;
-    //库存
-    //@ApiModelProperty("库存")
-    private int itemStock;
-    //供应商（允许不同供应商同种商品存储在相同表）
-    //@ApiModelProperty("供应商")
     private String itemSupplier;
-
-    private String itemPicturePath;
     private String shelfLife;
     private int itemVolume;
+
+    public ItemSummary(Long itemID, String itemType, String itemName, String itemDescription, double itemPurchasePrice, double itemRecommendedPrice, String itemSupplier, String shelfLife, int itemVolume) {
+        this.itemID = itemID;
+        this.itemType = itemType;
+        this.itemName = itemName;
+        this.itemDescription = itemDescription;
+        this.itemPurchasePrice = itemPurchasePrice;
+        this.itemRecommendedPrice = itemRecommendedPrice;
+        this.itemSupplier = itemSupplier;
+        this.shelfLife = shelfLife;
+        this.itemVolume = itemVolume;
+    }
 
     public String getShelfLife() {
         return shelfLife;
@@ -55,12 +50,16 @@ public class Items {
         this.itemVolume = itemVolume;
     }
 
-    public String getItemPicturePath() {
-        return itemPicturePath;
+    public ItemSummary() {
     }
 
-    public void setItemPicturePath(String itemPicturePath) {
-        this.itemPicturePath = itemPicturePath;
+
+    public Long getItemSummaryID() {
+        return itemSummaryID;
+    }
+
+    public void setItemSummaryID(Long itemSummaryID) {
+        this.itemSummaryID = itemSummaryID;
     }
 
     public Long getItemID() {
@@ -109,14 +108,6 @@ public class Items {
 
     public void setItemRecommendedPrice(double itemRecommendedPrice) {
         this.itemRecommendedPrice = itemRecommendedPrice;
-    }
-
-    public int getItemStock() {
-        return itemStock;
-    }
-
-    public void setItemStock(int itemStock) {
-        this.itemStock = itemStock;
     }
 
     public String getItemSupplier() {

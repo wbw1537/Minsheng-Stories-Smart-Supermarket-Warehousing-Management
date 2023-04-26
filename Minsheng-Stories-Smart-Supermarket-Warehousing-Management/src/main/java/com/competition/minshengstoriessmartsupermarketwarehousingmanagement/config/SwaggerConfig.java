@@ -51,8 +51,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("智慧超市仓储管理系统")
-                .description("智慧超市仓储管理系统")
+                .title("民生物语智慧商超仓储管理系统 — 接口文档")
+                .description("民生物语智慧商超仓储管理系统")
                 .version("1.0")
                 .build();
     }

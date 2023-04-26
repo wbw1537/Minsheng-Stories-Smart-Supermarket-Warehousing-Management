@@ -17,6 +17,20 @@ public class Containers {
     private String containerName;
     private String containerDescription;
 
+    public Containers(Long containerID) {
+    }
+
+    public Containers(double sales, String locateInfo, String containerType, String containerStatus, double containerVolume, double containerCurrentVolume, String containerName, String containerDescription) {
+        this.sales = sales;
+        this.locateInfo = locateInfo;
+        this.containerType = containerType;
+        this.containerStatus = containerStatus;
+        this.containerVolume = containerVolume;
+        this.containerCurrentVolume = containerCurrentVolume;
+        this.containerName = containerName;
+        this.containerDescription = containerDescription;
+    }
+
     public Long getContainerID() {
         return containerID;
     }

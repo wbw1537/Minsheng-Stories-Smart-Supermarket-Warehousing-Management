@@ -1,6 +1,7 @@
 package com.competition.minshengstoriessmartsupermarketwarehousingmanagement.controller.salesController;
 
 
+import com.competition.minshengstoriessmartsupermarketwarehousingmanagement.entitity.sales.DailySales;
 import com.competition.minshengstoriessmartsupermarketwarehousingmanagement.mapper.DailySalesMapper;
 import com.competition.minshengstoriessmartsupermarketwarehousingmanagement.mapper.orders.OrdersInfoMapper;
 import com.competition.minshengstoriessmartsupermarketwarehousingmanagement.mapper.orders.OrdersMapper;
@@ -66,10 +67,24 @@ public class SalesController {
         return dailySalesService.getPastMonthSalesPercentage();
     }
 
-    //根据商品种类以及id获取商品销售信息
-    @ApiOperation(value = "根据商品种类以及id获取商品销售信息")
+    //根据日期筛选昨天的销售数据，并且按照商品种类和商品id给出商品的销售信息
+    @ApiOperation(value = "根据日期筛选昨天的销售数据，并且按照商品种类和商品id给出商品的销售信息")
     @GetMapping("/yesterday-sales-profit")
     public Map<String, Object> getYesterdaySalesAndProfit(@RequestParam("itemType") String itemType, @RequestParam("itemID") int itemID) {
         return dailySalesService.getYesterdaySalesAndProfit(itemType, itemID);
+    }
+
+    //查询所有销售数据
+    @ApiOperation(value = "查询所有销售数据")
+    @GetMapping("/getAllSales")
+    public List<DailySales> getAllSales() {
+        return dailySalesService.getAllSales();
+    }
+
+    //根据日期筛选昨天的销售数据，并且按照货柜id给出货柜的销量
+    @ApiOperation(value = "根据日期筛选昨天的销售数据，并且按照货柜id给出货柜的销量")
+    @GetMapping("/getYesterdaySalesByContainerID")
+    public Map<String, Object> getYesterdaySalesByContainerID(Long containerID) {
+        return dailySalesService.getYesterdaySalesAndProfitByContainerID(containerID);
     }
 }

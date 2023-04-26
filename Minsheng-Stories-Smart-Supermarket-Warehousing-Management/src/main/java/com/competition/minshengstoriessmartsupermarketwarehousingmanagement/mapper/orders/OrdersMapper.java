@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface OrdersMapper extends BaseMapper<Order> {
@@ -19,9 +20,9 @@ public interface OrdersMapper extends BaseMapper<Order> {
 //    @Update("update ordersTable set containerID = #{containerID}, orderStatus = #{orderStatus}, customerID = #{customerID}, paymentInfo = #{paymentInfo}, orderTime = #{orderTime}, orderName = #{orderName} where orderID = #{orderID}")
 //    public int updateOrder(Order order);
 //
-//    //根据订单号删除订单信息
-//    @Delete("delete from ordersTable where orderID = #{orderID}")
-//    public int deleteOrderById(Long orderID);
+    //根据订单号删除订单信息
+    @Delete("delete from ordersTable where orderID = #{orderID}")
+    public void deleteOrderById(Long orderID);
 //
 //    //根据订单号查询订单信息
 //    @Select("select * from ordersTable where orderID = #{orderID}")
@@ -70,6 +71,12 @@ public interface OrdersMapper extends BaseMapper<Order> {
             "WHERE to_days(ordersTable.orderTime) = to_days(now())-1\n" +
             "GROUP BY ordersTable.containerID, ordersInfoTable.itemType, ordersInfoTable.itemID, ordersInfoTable.actuallyPrice, ordersInfoTable.purchasePrice;\n")
     public List<DailySales> generateDailySales();
+
+    //汇集订单信息制表
+    @Select("select ot.orderID as 订单编号, ot.containerID as 货柜编号, ot.orderStatus as 订单状态, ot.customerID as 用户编号, ot.paymentInfo as 支付信息, ot.orderTime as 订单完成时间 , sum(oit.amount) as 商品数, sum(oit.actuallyPrice) as 订单总价 from ordersTable ot\n" +
+            "inner join ordersInfoTable oit on oit.orderID = ot.orderID\n" +
+            "group by ot.orderID;")
+    public List<Map<String,Object>> getOrdersTable();
 
 
 }

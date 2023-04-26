@@ -10,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
-@Api(tags = "订单管理")
+@Api(tags = "订单接口")
 @RestController
 public class OrdersController {
     @Autowired
@@ -23,6 +24,28 @@ public class OrdersController {
     public String createOrder(Long orderID, Long containerID, String orderStatus, Long customerID, String paymentInfo, String orderName){
         return orderService.createOrder(orderID, containerID, orderStatus, customerID, paymentInfo, orderName);
     }
+
+    //汇集订单信息制表
+    @ApiOperation(value = "汇集订单信息制表")
+    @GetMapping("/orders")
+    public List<Map<String,Object>> getOrdersTable() {
+        return orderService.getOrdersTable();
+    }
+
+    //根据查询订单号查询订单信息
+    @ApiOperation(value = "根据查询订单号查询订单信息")
+    @GetMapping("/orders/{orderID}")
+    public List<Map<String,Object>> getOrdersTableByOrderID(@PathVariable("orderID") Long orderID) {
+        return orderService.getOrdersTableByOrderID(orderID);
+    }
+
+    //根据订单号删除订单信息
+    @ApiOperation(value = "根据订单号删除订单信息")
+    @DeleteMapping("/orders/{orderID}")
+    public String deleteOrderByOrderID(@PathVariable("orderID") Long orderID){
+        return orderService.deleteOrderByOrderID(orderID);
+    }
+
 //    //增添一条新的订单记录
 //    @ApiOperation(value = "增添一条新的订单记录")
 //    @PostMapping("/orders")
